@@ -62,21 +62,21 @@ const styles = {
   },
 };
 
-export default function GNB() {
+export default function GNB({ onNavigate }) {
   return (
     <nav style={styles.gnb}>
       <div style={styles.inner}>
-        <a href="/" style={styles.logo}>
+        <button onClick={() => onNavigate("home")} style={{ ...styles.logo, background: "none", border: "none", cursor: "pointer" }}>
           Tis<span style={styles.logoSpan}>tory</span>
-        </a>
+        </button>
         <ul style={styles.menu}>
-          <li><a href="/" style={styles.menuLink}>블로그홈</a></li>
-          <li><a href="/tags" style={styles.menuLink}>태그</a></li>
-          <li><a href="/guestbook" style={styles.menuLink}>방명록</a></li>
+          <li><button onClick={() => onNavigate("home")} style={{ ...styles.menuLink, background: "none", border: "none", cursor: "pointer" }}>블로그홈</button></li>
+          <li><a href="#" style={styles.menuLink}>태그</a></li>
+          <li><a href="#" style={styles.menuLink}>방명록</a></li>
         </ul>
         <div style={styles.right}>
-          <button style={styles.btnLogin}>로그인</button>
-          <button style={styles.btnWrite}>글쓰기</button>
+          <button style={styles.btnLogin} onClick={() => onNavigate("login")}>로그인</button>
+          <button style={styles.btnWrite} onClick={() => onNavigate("write")}>글쓰기</button>
         </div>
       </div>
     </nav>
