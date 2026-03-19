@@ -57,11 +57,11 @@ public class JwtTokenProvider {
     }
 
     public Claims parseClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
+        return Jwts.parser()                     // 1. parserBuilder() -> parser()
+                .verifyWith(key)                 // 2. 그대로 유지 (key는 SecretKey 타입이어야 함)
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+                .parseSignedClaims(token)        // 3. parseClaimsJws() -> parseSignedClaims()
+                .getPayload();                   // 4. getBody() -> getPayload()
     }
     /** 토큰에서 memberId 추출 */
     public Long getMemberId(String token) {
