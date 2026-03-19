@@ -84,7 +84,7 @@ README.md
 | 프레임워크 | Spring Boot 3.2.4 |
 | 보안 | Spring Security + JWT (jjwt 0.12.5) |
 | ORM | Spring Data JPA + Hibernate |
-| 데이터베이스 | H2 (개발) / MySQL 8 (운영) |
+| 데이터베이스 | MySQL 8 |
 | 빌드 | Maven |
 | 유틸리티 | Lombok, Bean Validation |
 
