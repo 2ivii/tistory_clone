@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, onNavigate }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <article
+      onClick={() => onNavigate && onNavigate("post", post.id)}
       style={{
         background: "#fff",
         border: "1px solid #e8e8e8",

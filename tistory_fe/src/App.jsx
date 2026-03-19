@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import GNB from "./components/GNB";
 import BlogHeader from "./components/BlogHeader";
 import PostCard from "./components/PostCard";
@@ -8,30 +8,35 @@ import Footer from "./components/Footer";
 import LoginPage from "./pages/LoginPage";
 import WritePage from "./pages/WritePage";
 import SignupPage from "./pages/SignupPage";
+import PostDetailPage from "./pages/PostDetailPage";
+import { posts } from "./data/posts";
 import "./styles/global.css";
 
 export default function App() {
-    const [page, setPage] = useState("home"); // "home" | "login" | "write"
-    const [posts, setPosts] = useState([]);
+  // page: "home" | "login" | "write" | "signup" | "post"
+  const [page, setPage]       = useState("home");
+  const [postId, setPostId]   = useState(null);
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await api.get('/posts');
-                setPosts(response.data.data); // BE의 ApiResponse.data 구조에 맞춤
-            } catch (error) {
-                console.error("데이터 로딩 실패", error);
-            }
-        };
-        fetchPosts();
-    }, []);
-    if (page === "login") return <LoginPage onNavigate={setPage} />;
-    if (page === "write") return <WritePage onNavigate={setPage} />;
-    if (page === "signup") return <SignupPage onNavigate={setPage} />;
+  const handleNavigate = (target, id = null) => {
+    setPage(target);
+    if (id !== null) setPostId(id);
+    window.scrollTo(0, 0);
+  };
+
+  if (page === "login")  return <LoginPage      onNavigate={handleNavigate} />;
+  if (page === "write")  return <WritePage       onNavigate={handleNavigate} />;
+  if (page === "signup") return <SignupPage      onNavigate={handleNavigate} />;
+  if (page === "post")   return (
+    <>
+      <GNB onNavigate={handleNavigate} />
+      <PostDetailPage postId={postId} onNavigate={handleNavigate} />
+      <Footer />
+    </>
+  );
 
   return (
     <>
-      <GNB onNavigate={setPage} />
+      <GNB onNavigate={handleNavigate} />
       <BlogHeader />
 
       {/* Main Layout */}
@@ -48,7 +53,7 @@ export default function App() {
         {/* Post List */}
         <main>
           {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
+            <PostCard key={post.id} post={post} onNavigate={handleNavigate} />
           ))}
           <Pagination total={5} />
         </main>
