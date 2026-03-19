@@ -3,35 +3,22 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:tistory;MODE=MySQL;NON_KEYWORDS=VALUE
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-
-  h2:
-    console:
-      enabled: true          # http://localhost:8080/h2-console
-      path: /h2-console
+    url: jdbc:mysql://localhost:3306/tistory_db?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: wjdalssla12
 
   jpa:
     hibernate:
-      ddl-auto: create-drop  # 개발용 (운영은 validate)
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.H2Dialect
-
-  # MySQL 운영 설정 예시 (H2 블록 제거 후 사용)
-  # datasource:
-  #   url: jdbc:mysql://localhost:3306/tistory?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-  #   driver-class-name: com.mysql.cj.jdbc.Driver
-  #   username: root
-  #   password: yourpassword
-  # jpa:
-  #   properties:
-  #     hibernate:
-  #       dialect: org.hibernate.dialect.MySQL8Dialect
+        # 최신 Hibernate 버전에서는 MySQLDialect로 통합해서 써도 잘 작동합니다.
+        dialect: org.hibernate.dialect.MySQLDialect
+        # DB 테이블 생성 시 엔진 설정 (선택 사항)
+        default_storage_engine: InnoDB
 
 jwt:
   secret: tistory-clone-jwt-secret-key-must-be-at-least-256-bits-long-for-hs256
