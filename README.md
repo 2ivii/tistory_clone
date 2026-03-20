@@ -53,16 +53,6 @@ README.md
 - 조회수 자동 집계
 - 글 상세: 읽기 진행 바·자동 목차(TOC)·이전·다음 글 네비게이션
 
-### 💬 댓글
-- 댓글 작성 및 좋아요
-- 신규 댓글 즉시 UI 반영
-
-### 🔍 검색 & 탐색
-- 키워드 전문 검색
-- 태그 기반 검색
-- 카테고리 필터링
-- 블로그 별 글 목록 조회
-
 ---
 
 ## 🛠 기술 스택
@@ -75,7 +65,6 @@ README.md
 | 번들러 | Vite 4.4 |
 | 스타일링 | CSS-in-JS (Inline Styles) |
 | 라우팅 | 자체 구현 (useState 기반 SPA) |
-| 폰트 | Noto Sans KR (Google Fonts) |
 
 ### Backend
 | 구분 | 기술 |
@@ -224,15 +213,6 @@ Authorization: Bearer {accessToken}
   "tags": ["React", "프론트엔드"]
 }
 ```
-
-### 블로그 & 회원
-
-| 메서드 | 엔드포인트 | 설명 | 인증 |
-|--------|-----------|------|------|
-| `GET` | `/api/blogs/{blogAddress}` | 블로그 프로필 조회 | ❌ |
-| `GET` | `/api/blogs/{blogAddress}/posts` | 블로그 글 목록 | ❌ |
-| `GET` | `/api/members/me` | 내 정보 조회 | ✅ |
-| `PATCH` | `/api/members/me/blog` | 블로그 설정 수정 | ✅ |
 
 ---
 
